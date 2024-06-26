@@ -4,7 +4,7 @@ namespace Compression.Huffman;
 
 public class Heap : IHeap
 { 
-    class Node
+    public class Node
     {
         public char Character { get; set; }
         public int Frequency { get; set; }

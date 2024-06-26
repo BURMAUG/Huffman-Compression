@@ -8,12 +8,11 @@ var fileByte = heap.OpenFile("Heap.cs"); // Opens, reads and returns a byte of t
 var frequency = heap.CharacterFreqTable(fileByte); 
  
 // create the forrest here
-IList<Node> forrest = new(); 
+IList<Heap.Node> forest = new List<Heap.Node>(); 
 foreach (KeyValuePair<char, int> entry in frequency)
 {
-	forrest.Add(new Node(entry.Key, entry.Value));
+	forest.Add(new Heap.Node(entry.Key, entry.Value));
 }
-
 // 
 
 
