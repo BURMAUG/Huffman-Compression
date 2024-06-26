@@ -1,0 +1,14 @@
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/bin/Debug/net8.0/Compression.Huffman
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/bin/Debug/net8.0/Compression.Huffman.deps.json
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/bin/Debug/net8.0/Compression.Huffman.runtimeconfig.json
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/bin/Debug/net8.0/Compression.Huffman.dll
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/bin/Debug/net8.0/Compression.Huffman.pdb
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.AssemblyInfoInputs.cache
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.AssemblyInfo.cs
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.csproj.CoreCompileInputs.cache
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.dll
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/refint/Compression.Huffman.dll
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.pdb
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.genruntimeconfig.cache
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/ref/Compression.Huffman.dll
