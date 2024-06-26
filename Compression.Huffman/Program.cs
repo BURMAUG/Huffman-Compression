@@ -3,10 +3,14 @@
 using Compression.Huffman;
 
 Heap heap = new Heap();
-var fileByte = heap.OpenFile("Heap.cs"); // Opens, reads and returns a byte of the file content
+var fileByte = heap.OpenFile("/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/Heap.cs"); // Opens, reads and returns a byte of the file content
 
-var frequency = heap.CharacterFreqTable(fileByte); 
- 
+var frequency = heap.CharacterFreqTable(fileByte);
+
+foreach (KeyValuePair<char, int> keyValuePair in frequency)
+{
+	Console.WriteLine($"{keyValuePair.Key} = {keyValuePair.Value}");
+}
 // create the forrest here
 IList<Heap.Node> forest = new List<Heap.Node>(); 
 foreach (KeyValuePair<char, int> entry in frequency)

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Text;
 
 namespace Compression.Huffman;
@@ -45,13 +46,14 @@ public class Heap : IHeap
     /// </summary>
     /// <param name="absolutePath"></param>
     /// <returns>A byte area of the content of the file.</returns>
-    public byte[] OpenFile(string absolutePath)
+    public byte[]? OpenFile(string absolutePath)
     {
         if (File.Exists(absolutePath))
         {
-            File.Open(absolutePath, FileMode.Open);
+            return  File.ReadAllBytes(absolutePath);
         }
-        return File.ReadAllBytes(absolutePath);
+
+        return null;
     }
 
     /// <summary>
@@ -59,15 +61,22 @@ public class Heap : IHeap
     /// </summary>
     /// <param name="data">data</param>
     /// <returns>Huffman encoding frequency table.</returns>
-    public Dictionary<Char, int> CharacterFreqTable(byte[] data)
+    public Dictionary<Char, int> CharacterFreqTable(byte[]? data)
     {
-        string dictionaryData = Encoding.UTF8.GetString(data); // Alternative BitConverter.ToString(data);
         Dictionary<char, int> freqTable = new Dictionary<char, int>();
-        foreach (var ch in dictionaryData)
+        if (data != null)
         {
-            if (!freqTable.TryAdd(ch, 1))
+            string dictionaryData = Encoding.UTF8.GetString(data); // Alternative BitConverter.ToString(data);
+            foreach (var ch in dictionaryData)
             {
-                freqTable.Add(ch, freqTable[ch]+1);
+                if (!freqTable.ContainsKey(ch))
+                {
+                    freqTable.Add(ch, 1);
+                }
+                else
+                {
+                    freqTable[ch]++;
+                }
             }
         }
         return freqTable;

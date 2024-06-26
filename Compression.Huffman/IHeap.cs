@@ -15,6 +15,6 @@ public interface IHeap
     void Swap(int value1, int value2);
     void HeapifyDown(int idx);
     void HeapifyUp(int idx);
-    byte[] OpenFile(string absolutePath);
-    Dictionary<Char, int> CharacterFreqTable(byte[] data);
+    byte[]? OpenFile(string absolutePath);
+    Dictionary<Char, int> CharacterFreqTable(byte[]? data);
 }

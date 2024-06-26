@@ -12,3 +12,4 @@
 /Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.pdb
 /Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.genruntimeconfig.cache
 /Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/ref/Compression.Huffman.dll
+/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/obj/Debug/net8.0/Compression.Huffman.sourcelink.json

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Compression.Huffman")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fccb028ce2614ea2220f442218430fd4a127396")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae593dce84585b517e511e341ba2189d0df14aa5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Compression.Huffman")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Compression.Huffman")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
