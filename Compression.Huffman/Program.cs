@@ -5,19 +5,19 @@ using Compression.Huffman;
 Heap heap = new Heap();
 var fileByte = heap.OpenFile("/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/Heap.cs"); // Opens, reads and returns a byte of the file content
 
-var frequency = heap.CharacterFreqTable(fileByte);
+var frequency = heap.CharacterFreqTable(fileByte); // Creates a frequency table 
 
 foreach (KeyValuePair<char, int> keyValuePair in frequency)
 {
 	Console.WriteLine($"{keyValuePair.Key} = {keyValuePair.Value}");
 }
+
 // create the forrest here
-IList<Heap.Node> forest = new List<Heap.Node>(); 
 foreach (KeyValuePair<char, int> entry in frequency)
 {
-	forest.Add(new Heap.Node(entry.Key, entry.Value));
+	heap.HeapNodes.Add(new Heap.Node(entry.Key, entry.Value));
 }
-// 
+
 
 
 
@@ -158,11 +158,3 @@ foreach (KeyValuePair<char, int> entry in frequency)
 //     }
 // }
 //
-
-
-
-
-
-
-
-

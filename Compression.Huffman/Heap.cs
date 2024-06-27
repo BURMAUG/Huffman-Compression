@@ -5,16 +5,12 @@ namespace Compression.Huffman;
 
 public class Heap : IHeap
 { 
-    public class Node
+    internal class Node
     {
         public char Character { get; set; }
         public int Frequency { get; set; }
         public Node? Left { get; set; }
         public Node? Right { get; set; }
-
-        public Node()
-        {
-        }
 
         // used to create the forr
         public Node(char character, int frequency)
@@ -36,9 +32,9 @@ public class Heap : IHeap
         }
     }
     
-    private List<Node> HeapNodes { get; set; }= new();
-    private Node Left;
-    private Node Right;
+    internal List<Node> HeapNodes { get; set; }= new();
+    internal Node Left;
+    internal Node Right;
     
 
     /// <summary>
