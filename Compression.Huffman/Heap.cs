@@ -4,10 +4,10 @@ using System.Text;
 namespace Compression.Huffman;
 
 public class Heap : IHeap
-{ 
-    internal class Node
+{
+    public class Node
     {
-        public char Character { get; set; }
+        public char? Character { get; set; }
         public int Frequency { get; set; }
         public Node? Left { get; set; }
         public Node? Right { get; set; }
@@ -20,7 +20,7 @@ public class Heap : IHeap
         }
 
         /// This is the Heap Node        
-        public Node(char character,
+        public Node(char? character,
             int frequency,
             Node? leftNode = null,
             Node? rightNode = null)
@@ -33,23 +33,19 @@ public class Heap : IHeap
     }
     
     internal List<Node> HeapNodes { get; set; }= new();
-    internal Node Left;
+    internal Node? Left;
     internal Node Right;
-    
 
     /// <summary>
     ///     Opens the file for a read and returns the bytes.
     /// </summary>
     /// <param name="absolutePath"></param>
     /// <returns>A byte area of the content of the file.</returns>
-    public byte[]? OpenFile(string absolutePath)
+    public byte[] OpenFile(string absolutePath)
     {
-        if (File.Exists(absolutePath))
-        {
-            return  File.ReadAllBytes(absolutePath);
-        }
-
-        return null;
+        if (!File.Exists(absolutePath))
+            throw new FileNotFoundException("Not found");
+        return  File.ReadAllBytes(absolutePath);
     }
 
     /// <summary>
@@ -62,31 +58,53 @@ public class Heap : IHeap
         Dictionary<char, int> freqTable = new Dictionary<char, int>();
         if (data != null)
         {
-            string dictionaryData = Encoding.UTF8.GetString(data); // Alternative BitConverter.ToString(data);
+            string dictionaryData = System.Text.Encoding.UTF8.GetString(data);// Encoding.GetString(data); // Alternative BitConverter.ToString(data);
             foreach (var ch in dictionaryData)
             {
                 if (!freqTable.ContainsKey(ch))
-                {
                     freqTable.Add(ch, 1);
-                }
                 else
-                {
                     freqTable[ch]++;
-                }
             }
         }
         return freqTable;
     }
-    
+
+    public void Encoding(Node root, string s, Dictionary<char?, string> frqTable)
+    {
+        if (root.Left == null && root.Right == null && root.Character != null)
+        {
+            frqTable[root.Character] = s;
+            return;
+        }
+
+        if (root.Left != null) Encoding(root.Left, s + "0", frqTable);
+        if (root.Right != null) Encoding(root.Right, s + "1", frqTable);
+    }
+
+
+    public void MakeHeap()
+    {
+        while (HeapNodes.Count > 1)
+        {
+            Node first =(Node) DeleteMin();
+            Node second =(Node) DeleteMin();
+            Node parent = new Node(null, first.Frequency + second.Frequency, first, second);
+            Insert(parent);
+        }
+    }
+
     /// <summary>
     ///     Insert a new element into a heap DS.
     /// </summary>
     /// <param name="element"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public void Insert(int element)
+    public void Insert(Node node)
     {
         // how do i do this?
-        throw new NotImplementedException();
+        // the invariants are going to be established here.
+        HeapNodes.Add(node);
+        HeapifyUp(HeapNodes.Count-1);
     }
 
     /// <summary>
@@ -94,9 +112,19 @@ public class Heap : IHeap
     /// </summary>
     /// <param name="element"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public void Remove(int element)
+    public Object DeleteMin()
     {
-        throw new NotImplementedException();
+        if (HeapNodes.Count <= 0)
+        {
+            throw new IndexOutOfRangeException("Nothing on the heap.");
+        }
+        // take from the heap
+        Node small = HeapNodes[0]; //
+        Node last = HeapNodes[^1]; // why? be cause I need to put it at the first position
+        HeapNodes[0] = last;
+        HeapNodes.Remove(HeapNodes[^1]);
+        HeapifyDown(0);
+        return small;
     }
 
     /// <summary>
@@ -147,12 +175,35 @@ public class Heap : IHeap
 
     public void HeapifyDown(int idx)
     {
-        throw new NotImplementedException();
+        int smallest = idx;
+        int rightChild = RightChild(idx);
+        int leftChild = LeftChild(idx);
+        
+        if (HasLeftChild(idx) && HeapNodes[idx].Frequency < HeapNodes[smallest].Frequency)
+        {
+            smallest = leftChild;
+        }
+
+        if (HasRightChild(idx) && HeapNodes[idx].Frequency < HeapNodes[smallest].Frequency)
+        {
+            smallest = rightChild;
+        }
+
+        if (smallest != idx)
+        {
+            Swap(idx, smallest);
+            HeapifyDown(smallest);
+        }
     }
 
     public void HeapifyUp(int idx)
     {
-        throw new NotImplementedException();
+        int parentIdx = Parent(idx);
+        if (idx > 0 && HeapNodes[idx].Frequency < HeapNodes[parentIdx].Frequency)
+        {
+            Swap(idx, parentIdx);
+            HeapifyUp(parentIdx);
+        }
     }
 }
 

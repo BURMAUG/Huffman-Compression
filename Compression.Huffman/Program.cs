@@ -3,21 +3,33 @@
 using Compression.Huffman;
 
 Heap heap = new Heap();
-var fileByte = heap.OpenFile("/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/Heap.cs"); // Opens, reads and returns a byte of the file content
+byte[] fileByte = heap.OpenFile("/Users/dj/Developer/manning/APS.NET-CORE/Projects/Compression/Compression.Huffman/Heap.cs"); // Opens, reads and returns a byte of the file content
 
-var frequency = heap.CharacterFreqTable(fileByte); // Creates a frequency table 
+Dictionary<char, int>  frequency = heap.CharacterFreqTable(fileByte); // Creates a frequency table 
 
 foreach (KeyValuePair<char, int> keyValuePair in frequency)
 {
 	Console.WriteLine($"{keyValuePair.Key} = {keyValuePair.Value}");
 }
 
+Console.WriteLine();
+Console.WriteLine();
+
 // create the forrest here
 foreach (KeyValuePair<char, int> entry in frequency)
 {
-	heap.HeapNodes.Add(new Heap.Node(entry.Key, entry.Value));
+	heap.Insert(new Heap.Node(entry.Key, entry.Value));
 }
 
+heap.MakeHeap();
+Dictionary<char?, string> freq = new Dictionary<char?, string>();
+heap.Encoding(heap.HeapNodes[0], "", freq);
+
+foreach(KeyValuePair<char?, string> entry in freq)
+{
+	Console.WriteLine($"{entry.Key} {entry.Value}");
+}
+// From the class heap start to make a min-heap by a series of deletes  
 
 
 
