@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Text;
 using Compression.Huffman;
 
 Heap heap = new Heap();
@@ -7,13 +8,13 @@ byte[] fileByte = heap.OpenFile("/Users/dj/Developer/manning/APS.NET-CORE/Projec
 
 Dictionary<char, int>  frequency = heap.CharacterFreqTable(fileByte); // Creates a frequency table 
 
-foreach (KeyValuePair<char, int> keyValuePair in frequency)
-{
-	Console.WriteLine($"{keyValuePair.Key} = {keyValuePair.Value}");
-}
-
-Console.WriteLine();
-Console.WriteLine();
+// foreach (KeyValuePair<char, int> keyValuePair in frequency)
+// {
+// 	Console.WriteLine($"{keyValuePair.Key} = {keyValuePair.Value}");
+// }
+//
+// Console.WriteLine();
+// Console.WriteLine();
 
 // create the forrest here
 foreach (KeyValuePair<char, int> entry in frequency)
@@ -21,9 +22,11 @@ foreach (KeyValuePair<char, int> entry in frequency)
 	heap.Insert(new Heap.Node(entry.Key, entry.Value));
 }
 
+Console.WriteLine();
+Console.WriteLine();
 heap.MakeHeap();
 Dictionary<char?, string> freq = new Dictionary<char?, string>();
-heap.Encoding(heap.HeapNodes[0], "", freq);
+heap.Encoding(heap.HeapNodes[0], new StringBuilder(""), freq);
 
 foreach(KeyValuePair<char?, string> entry in freq)
 {

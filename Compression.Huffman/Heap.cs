@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Text;
 
 namespace Compression.Huffman;
@@ -32,7 +31,7 @@ public class Heap : IHeap
         }
     }
     
-    internal List<Node> HeapNodes { get; set; }= new();
+    internal List<Node> HeapNodes { get; }= new();
     internal Node? Left;
     internal Node Right;
 
@@ -70,16 +69,27 @@ public class Heap : IHeap
         return freqTable;
     }
 
-    public void Encoding(Node root, string s, Dictionary<char?, string> frqTable)
+    public void Encoding(Node root, StringBuilder s, Dictionary<char?, string> frqTable)
     {
         if (root.Left == null && root.Right == null && root.Character != null)
         {
-            frqTable[root.Character] = s;
+            frqTable[root.Character] = s.ToString();
             return;
         }
 
-        if (root.Left != null) Encoding(root.Left, s + "0", frqTable);
-        if (root.Right != null) Encoding(root.Right, s + "1", frqTable);
+        if (root.Left != null)
+        {
+            StringBuilder leftPath = new StringBuilder(s.ToString());
+            leftPath.Append("0");
+            Encoding(root.Left, leftPath, frqTable);
+        }
+
+        if (root.Right != null)
+        {
+            StringBuilder rightPath = new StringBuilder(s.ToString());
+            rightPath.Append("1");
+            Encoding(root.Right, rightPath, frqTable);
+        }
     }
 
 
@@ -88,7 +98,9 @@ public class Heap : IHeap
         while (HeapNodes.Count > 1)
         {
             Node first =(Node) DeleteMin();
+            Console.WriteLine($"{first.Character} {first.Frequency}");
             Node second =(Node) DeleteMin();
+            Console.WriteLine($"{second.Character} {second.Frequency}");
             Node parent = new Node(null, first.Frequency + second.Frequency, first, second);
             Insert(parent);
         }
@@ -97,7 +109,7 @@ public class Heap : IHeap
     /// <summary>
     ///     Insert a new element into a heap DS.
     /// </summary>
-    /// <param name="element"></param>
+    /// <param name="node"></param>
     /// <exception cref="NotImplementedException"></exception>
     public void Insert(Node node)
     {
@@ -110,7 +122,6 @@ public class Heap : IHeap
     /// <summary>
     ///     Removes an element from a heap.
     /// </summary>
-    /// <param name="element"></param>
     /// <exception cref="NotImplementedException"></exception>
     public Object DeleteMin()
     {
@@ -122,7 +133,7 @@ public class Heap : IHeap
         Node small = HeapNodes[0]; //
         Node last = HeapNodes[^1]; // why? be cause I need to put it at the first position
         HeapNodes[0] = last;
-        HeapNodes.Remove(HeapNodes[^1]);
+        HeapNodes.RemoveAt(HeapNodes.Count-1);
         HeapifyDown(0);
         return small;
     }
@@ -179,12 +190,12 @@ public class Heap : IHeap
         int rightChild = RightChild(idx);
         int leftChild = LeftChild(idx);
         
-        if (HasLeftChild(idx) && HeapNodes[idx].Frequency < HeapNodes[smallest].Frequency)
+        if (HasLeftChild(idx) && HeapNodes[leftChild].Frequency < HeapNodes[smallest].Frequency)
         {
             smallest = leftChild;
         }
 
-        if (HasRightChild(idx) && HeapNodes[idx].Frequency < HeapNodes[smallest].Frequency)
+        if (HasRightChild(idx) && HeapNodes[rightChild].Frequency < HeapNodes[smallest].Frequency)
         {
             smallest = rightChild;
         }

@@ -1,4 +1,6 @@
 
+using System.Text;
+
 namespace Compression.Huffman;
 
 public interface IHeap
@@ -15,6 +17,6 @@ public interface IHeap
     void HeapifyUp(int idx);
     byte[] OpenFile(string absolutePath);
     Dictionary<Char, int> CharacterFreqTable(byte[]? data);
-    void Encoding(Heap.Node root, string s, Dictionary<char?, string> frqTable);
+    void Encoding(Heap.Node root, StringBuilder s, Dictionary<char?, string> frqTable);
     void MakeHeap();
 }
